@@ -9,7 +9,8 @@ module Persistence
     def call(todos)
       File.open(@file, "w") do |f|
         todos.each do |todo|
-          f.write "- [ ] #{todo.label}\n"
+          completed = todo.completed? ? "x" : " "
+          f.write "- [#{completed}] #{todo.label}\n"
         end
       end
     end
