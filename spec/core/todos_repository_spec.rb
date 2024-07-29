@@ -1,5 +1,4 @@
 require "spec_helper"
-require_relative "../../core/todo"
 require_relative "../../core/todos_repository"
 
 RSpec.describe TodosRepository do
