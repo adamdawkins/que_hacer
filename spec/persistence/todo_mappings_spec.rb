@@ -13,6 +13,9 @@ RSpec.describe Persistence::TodoMappings do
   end
 
   describe ".to_value" do
-    it "returns a Todo with the label and completed attributes"
+    it "returns a Todo with the label and completed attributes" do
+      todo = described_class.to_value("- [x] Buy Cheese")
+      expect([todo.label, todo.completed?]).to eq ["Buy Cheese", true]
+    end
   end
 end
