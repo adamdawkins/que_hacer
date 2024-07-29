@@ -9,12 +9,27 @@ module QueHacer
 
       class Version < Dry::CLI::Command
         desc "Print version"
+
         def call(*)
           puts "0.0.1"
         end
       end
 
+      module Items
+        class List < Dry::CLI::Command
+          desc "Lists items"
+
+          def call(*)
+            puts "- [ ] Buy Milk"
+          end
+        end
+      end
+
       register "version", Version, aliases: ["v", "-v", "--version"]
+
+      register "items", aliases: ["i"] do |prefix|
+        prefix.register "list", Items::List
+      end
     end
   end
 end
