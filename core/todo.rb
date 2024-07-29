@@ -1,9 +1,9 @@
 class Todo
   attr_reader :label
 
-  def initialize(label:)
+  def initialize(label:, completed: false)
     @label = label
-    @completed = false
+    @completed = completed
   end
 
   def completed?

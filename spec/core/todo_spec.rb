@@ -11,7 +11,11 @@ RSpec.describe Todo do
       expect { described_class.new }.to raise_error ArgumentError
     end
 
-    it "sets 'completed' to false" do
+    it "sets completed" do
+      expect(described_class.new(label: "Foo", completed: true)).to be_completed
+    end
+
+    it "defaults 'completed' to false" do
       todo = described_class.new(label: "Mayonnaise")
       expect(todo.completed?).to be false
     end
