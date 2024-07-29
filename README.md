@@ -4,11 +4,14 @@ application, but I was getting too caught up in web stuff; so going to do the
 same with rudimentary puts calls acting as the shell, maybe eventually a CLI
 app, and then extend out from there.
 
+* 2024-07-29 Update to plan:
+- I'm going to move to using a CLI, because without user interaction, there are really no side-effects at all to worry about, and I can't test my 'unknown', because a TODO list is literally just an array.
+
 ## Features
 (Modified from TODO MVC)
 
 No todos
-[ ] When there are no todos - the only action is to add a todo
+[-] When there are no todos - the only action is to add a todo
 
 Mark all as complete - marks all todos complete
 

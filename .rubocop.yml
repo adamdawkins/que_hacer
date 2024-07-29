@@ -1,0 +1,49 @@
+AllCops:
+  TargetRubyVersion: 3.2.0
+  NewCops: enable
+Layout/LineLength:
+  Enabled: True
+Metrics/BlockLength:
+  CountComments: false
+  Max: 5
+  CountAsOne: ['array', 'hash']
+
+Metrics/ClassLength:
+  Description: 'Avoid classes longer than 100 lines of code.'
+  CountAsOne: ['array', 'hash']
+  Max: 100
+  Enabled: true
+
+Metrics/MethodLength:
+  Description: 'Avoid methods longer than 5 lines of code.'
+  StyleGuide: '<https://github.com/bbatsov/ruby-style-guide#short-methods>'
+  Max: 5
+  Enabled: true
+  CountAsOne: ['array', 'hash', 'heredoc']
+
+Metrics/ParameterLists:
+  Description: 'Pass no more than four parameters into a method.'
+  Max: 4
+
+Naming/MemoizedInstanceVariableName:
+  EnforcedStyleForLeadingUnderscores: optional
+Naming/PredicateName:
+  Enabled: false
+Naming/VariableNumber:
+  Enabled: false
+Style/ClassAndModuleChildren:
+  Enabled: False
+Style/Documentation:
+  Enabled: false
+Style/FrozenStringLiteralComment:
+  Enabled: false
+Style/Lambda:
+  EnforcedStyle: literal
+Style/StringLiterals:
+  EnforcedStyle: double_quotes
+Style/SymbolArray:
+  Enabled: false
+Style/UnlessElse:
+  Enabled: true
+Style/WordArray:
+  Enabled: false
