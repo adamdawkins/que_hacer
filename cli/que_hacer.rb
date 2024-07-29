@@ -20,7 +20,14 @@ module QueHacer
           desc "Lists items"
 
           def call(*)
-            puts "- [ ] Buy Milk"
+            todos = []
+            if todos.empty?
+              puts "Empty list"
+            else
+              todos.each do |todo|
+                puts todo
+              end
+            end
           end
         end
       end
