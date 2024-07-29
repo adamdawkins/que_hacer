@@ -1,4 +1,5 @@
 require_relative "../core/todo"
+require_relative "todo_mappings"
 
 module Persistence
   class Save
@@ -9,8 +10,7 @@ module Persistence
     def call(todos)
       File.open(@file, "w") do |f|
         todos.each do |todo|
-          completed = todo.completed? ? "x" : " "
-          f.write "- [#{completed}] #{todo.label}\n"
+          f.write "#{TodoMappings.to_markdown(todo)}\n"
         end
       end
     end
