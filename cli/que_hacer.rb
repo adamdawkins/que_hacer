@@ -42,9 +42,9 @@ module QueHacer
           ]
 
           def call(label:, **)
-            todos = TodosRepository.new([])
-            todos = todos.add(label)
-            todos.each do |todo|
+            @todos ||= TodosRepository.new([])
+            @todos = @todos.add(label)
+            @todos.each do |todo|
               puts "- [ ] #{todo.label}"
             end
           end
