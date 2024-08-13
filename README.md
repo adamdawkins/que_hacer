@@ -30,4 +30,4 @@ Displays the number of active todos in a pluralized form.
 Removes completed todos when clicked. Should be hidden when there are no completed todos.
 
 Persistence:
-* Markdown for the CLI app
+[x] Markdown for the CLI app
