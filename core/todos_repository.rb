@@ -8,4 +8,8 @@ class TodosRepository
   def add(label)
     @todos + [Todo.new(label:)]
   end
+
+  def all
+    @todos
+  end
 end
