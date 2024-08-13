@@ -101,15 +101,15 @@ module QueHacer
         end
       end
 
-      register "version", Version, aliases: ["v", "-v", "--version"]
-
       register "items", aliases: ["i"] do |prefix|
         prefix.register "add", Items::Add
-        prefix.register "list", Items::List
-        prefix.register "count", Items::Count
         prefix.register "clear", Items::ClearCompleted
         prefix.register "complete", Items::Complete
+        prefix.register "count", Items::Count
+        prefix.register "list", Items::List
       end
+
+      register "version", Version, aliases: ["v", "-v", "--version"]
     end
   end
 end
