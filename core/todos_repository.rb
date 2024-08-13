@@ -14,10 +14,16 @@ class TodosRepository
   end
 
   def count_active
-    @todos.reject(&:completed?).count
+    active_todos.count
   end
 
   def clear_completed
-    @todos.reject(&:completed?)
+    active_todos
+  end
+
+  private
+
+  def active_todos
+    @active_todos ||= @todos.reject(&:completed?)
   end
 end
