@@ -24,7 +24,7 @@ RSpec.describe TodosRepository do
     end
   end
 
-  describe "clear_completed" do
+  describe "#clear_completed" do
     let(:todos) do
       [Todo.new(label: "Buy Milk"), Todo.new(label: "Buy Eggs", completed: false),
        Todo.new(label: "Buy Cheese", completed: true), Todo.new(label: "Buy Bread", completed: true)]
