@@ -13,7 +13,7 @@ app, and then extend out from there.
 No todos
 [x] When there are no todos - the only action is to add a todo
 
-[ ] Mark all as complete - marks all todos complete
+[-] Mark all as complete - marks all todos complete
 
 Item
 A todo item has three possible interactions:
@@ -31,3 +31,7 @@ Removes completed todos when clicked. Should be hidden when there are no complet
 
 Persistence:
 [x] Markdown for the CLI app
+
+CLI:
+[ ] - normalize the 'view' of the list
+[ ] - memoize the things we keep doing again and again.
