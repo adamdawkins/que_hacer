@@ -23,7 +23,7 @@ A todo item has three possible interactions:
 [ ] - remove todo
 [ ] - update todo
 
-[-] Counter
+[x] Counter
 Displays the number of active todos in a pluralized form.
 
 [ ] Clear completed button

@@ -36,6 +36,14 @@ module QueHacer
           end
         end
 
+        class Count < Dry::CLI::Command
+          desc "Counts active items"
+          def call(*)
+            count = TodosRepository.new(Persistence::Fetch.new.all).count_active
+            puts "#{count} active item#{count == 1 ? '' : 's'}"
+          end
+        end
+
         class Add < Dry::CLI::Command
           desc "Adds a Todo"
           argument :label, required: true, desc: "The description of the todo"
@@ -85,6 +93,7 @@ module QueHacer
 
       register "items", aliases: ["i"] do |prefix|
         prefix.register "list", Items::List
+        prefix.register "count", Items::Count
         prefix.register "add", Items::Add
         prefix.register "complete", Items::Complete
       end
