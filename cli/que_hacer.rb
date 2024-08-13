@@ -4,6 +4,7 @@ require "dry/cli"
 
 require_relative "../core/todos_repository"
 require_relative "../persistence/fetch"
+require_relative "../persistence/save"
 
 module QueHacer
   module CLI
@@ -43,8 +44,9 @@ module QueHacer
           ]
 
           def call(label:, **)
-            @todos ||= TodosRepository.new([])
+            @todos ||= TodosRepository.new(Persistence::Fetch.new.all)
             @todos = @todos.add(label)
+            Persistence::Save.new.call(@todos)
             @todos.each do |todo|
               puts "- [ ] #{todo.label}"
             end
