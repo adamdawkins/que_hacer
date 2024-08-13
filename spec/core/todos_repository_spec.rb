@@ -6,7 +6,6 @@ RSpec.describe TodosRepository do
   let(:todos) { [Todo.new(label: "Buy Milk"), Todo.new(label: "Buy Eggs")] }
   describe "#add" do
     it "adds a new todo to the todos with the label and returns them all" do
-      repository = described_class.new(todos)
       expect(repository.add("Go trout fishing").map(&:label)).to eq(
         ["Buy Milk", "Buy Eggs", "Go trout fishing"]
       )
