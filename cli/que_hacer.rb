@@ -3,6 +3,7 @@ require "bundler/setup"
 require "dry/cli"
 
 require_relative "../core/todos_repository"
+require_relative "../persistence/fetch"
 
 module QueHacer
   module CLI
@@ -22,12 +23,12 @@ module QueHacer
           desc "Lists items"
 
           def call(*)
-            todos = []
+            todos = Persistence::Fetch.new.all
             if todos.empty?
               puts "Empty list"
             else
               todos.each do |todo|
-                puts todo
+                puts todo.label
               end
             end
           end
