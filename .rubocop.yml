@@ -7,6 +7,8 @@ Metrics/BlockLength:
   CountComments: false
   Max: 5
   CountAsOne: ['array', 'hash']
+  Exclude:
+   - 'spec/**/*'
 
 Metrics/ClassLength:
   Description: 'Avoid classes longer than 100 lines of code.'
