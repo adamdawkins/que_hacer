@@ -11,22 +11,23 @@ app, and then extend out from there.
 (Modified from TODO MVC)
 
 No todos
-[-] When there are no todos - the only action is to add a todo
+[x] When there are no todos - the only action is to add a todo
 
 Mark all as complete - marks all todos complete
 
 Item
 A todo item has three possible interactions:
 
-- complete one todo
-- edit one todo
-- remove todo
-- update todo
+[x] - complete one todo
+[ ] - edit one todo
+[ ] - remove todo
+[ ] - update todo
 
-Counter
+[-] Counter
 Displays the number of active todos in a pluralized form.
 
-Clear completed button
+[ ] Clear completed button
 Removes completed todos when clicked. Should be hidden when there are no completed todos.
 
-Persistence
+Persistence:
+* Markdown for the CLI app
