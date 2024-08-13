@@ -88,6 +88,24 @@ module QueHacer
           end
         end
 
+        class Remove < Dry::CLI::Command
+          desc "Removes a todo"
+          argument :id, required: true, desc: "The number of the todo you want to complete"
+
+          example [
+            "0"
+          ]
+
+          def call(id:, **)
+            @todos ||= TodosRepository.new(Persistence::Fetch.new.all).remove(id.to_i)
+            Persistence::Save.new.call(@todos)
+
+            @todos.each do |todo, index|
+              puts "#{index} - [#{todo.completed? ? 'x' : ' '}] #{todo.label}"
+            end
+          end
+        end
+
         class ClearCompleted < Dry::CLI::Command
           desc "deletes completed todos"
           def call(*)
@@ -107,6 +125,7 @@ module QueHacer
         prefix.register "complete", Items::Complete
         prefix.register "count", Items::Count
         prefix.register "list", Items::List
+        prefix.register "remove", Items::Remove
       end
 
       register "version", Version, aliases: ["v", "-v", "--version"]
