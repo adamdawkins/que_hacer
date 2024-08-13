@@ -19,6 +19,12 @@ RSpec.describe TodosRepository do
     end
   end
 
+  describe "#remove" do
+    it "returns all todos except the todo at the index of the removed todo" do
+      expect(repository.remove(1).map(&:label)).to eq ["Buy Milk"]
+    end
+  end
+
   describe "clear_completed" do
     let(:todos) do
       [Todo.new(label: "Buy Milk"), Todo.new(label: "Buy Eggs", completed: false),

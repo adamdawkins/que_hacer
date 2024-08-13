@@ -13,6 +13,12 @@ class TodosRepository
     @todos
   end
 
+  def remove(index)
+    @todos.each_with_index.map do |todo, idx|
+      todo unless idx == index
+    end.compact
+  end
+
   def count_active
     active_todos.count
   end
