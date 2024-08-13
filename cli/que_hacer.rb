@@ -28,8 +28,8 @@ module QueHacer
             if todos.empty?
               puts "Empty list"
             else
-              todos.each do |todo|
-                puts todo.label
+              todos.each_with_index do |todo, index|
+                puts "#{index}: #{todo.label}"
               end
             end
           end
