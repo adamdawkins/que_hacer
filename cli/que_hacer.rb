@@ -3,6 +3,7 @@ require "bundler/setup"
 require "dry/cli"
 
 require_relative "../core/todos_repository"
+require_relative "../core/actions/todos/complete"
 require_relative "../persistence/fetch"
 require_relative "../persistence/save"
 
@@ -60,6 +61,23 @@ module QueHacer
           example [
             "0"
           ]
+
+          def call(id:, **)
+            @todos ||= TodosRepository.new(Persistence::Fetch.new.all).all
+            @todos = @todos.each_with_index.map do |todo, index|
+              if index == id.to_i
+                Actions::Todos::Complete.call(todo)
+              else
+                todo
+              end
+            end
+
+            Persistence::Save.new.call(@todos)
+
+            @todos.each do |todo, index|
+              puts "#{index} - [#{todo.completed? ? 'x' : ' '}] #{todo.label}"
+            end
+          end
         end
       end
 
