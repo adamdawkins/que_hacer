@@ -18,4 +18,14 @@ RSpec.describe TodosRepository do
       expect(repository.all).to eq todos
     end
   end
+
+  describe "#count_active" do
+    let(:todos) do
+      [Todo.new(label: "Buy Milk"), Todo.new(label: "Buy Eggs", completed: false),
+       Todo.new(label: "Buy Milk", completed: true), Todo.new(label: "Buy Bread", completed: true)]
+    end
+    it "returns the number of todos that are not complete" do
+      expect(repository.count_active).to eq 2
+    end
+  end
 end

@@ -12,4 +12,8 @@ class TodosRepository
   def all
     @todos
   end
+
+  def count_active
+    @todos.reject(&:completed?).count
+  end
 end
