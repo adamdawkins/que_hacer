@@ -52,6 +52,15 @@ module QueHacer
             end
           end
         end
+
+        class Complete < Dry::CLI::Command
+          desc "Completes a todo"
+          argument :id, required: true, desc: "The number of the todo you want to complete"
+
+          example [
+            "0"
+          ]
+        end
       end
 
       register "version", Version, aliases: ["v", "-v", "--version"]
@@ -59,6 +68,7 @@ module QueHacer
       register "items", aliases: ["i"] do |prefix|
         prefix.register "list", Items::List
         prefix.register "add", Items::Add
+        prefix.register "complete", Items::Complete
       end
     end
   end
