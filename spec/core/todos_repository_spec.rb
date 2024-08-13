@@ -19,6 +19,16 @@ RSpec.describe TodosRepository do
     end
   end
 
+  describe "clear_completed" do
+    let(:todos) do
+      [Todo.new(label: "Buy Milk"), Todo.new(label: "Buy Eggs", completed: false),
+       Todo.new(label: "Buy Cheese", completed: true), Todo.new(label: "Buy Bread", completed: true)]
+    end
+    it "returns the todos without the completed ones" do
+      expect(repository.clear_completed.map(&:label)).to eq ["Buy Milk", "Buy Eggs"]
+    end
+  end
+
   describe "#count_active" do
     let(:todos) do
       [Todo.new(label: "Buy Milk"), Todo.new(label: "Buy Eggs", completed: false),
