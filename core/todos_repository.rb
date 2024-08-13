@@ -1,4 +1,5 @@
 require_relative "todo"
+require_relative "actions/todos/complete"
 
 class TodosRepository
   def initialize(todos = [])
@@ -11,6 +12,16 @@ class TodosRepository
 
   def all
     @todos
+  end
+
+  def complete(index)
+    @todos.each_with_index.map do |todo, idx|
+      if idx == index
+        Actions::Todos::Complete.call(todo)
+      else
+        todo
+      end
+    end
   end
 
   def remove(index)

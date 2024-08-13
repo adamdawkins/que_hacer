@@ -24,6 +24,15 @@ RSpec.describe TodosRepository do
     end
   end
 
+  describe "#complete" do
+    it "marks the todo at the index as complete" do
+      expect(repository.complete(1).map { |todo| [todo.label, todo.completed?] }).to eq(
+        [["Buy Milk", false],
+         ["Buy Eggs", true]]
+      )
+    end
+  end
+
   describe "#clear_completed" do
     let(:todos) do
       [Todo.new(label: "Buy Milk"), Todo.new(label: "Buy Eggs", completed: false),
