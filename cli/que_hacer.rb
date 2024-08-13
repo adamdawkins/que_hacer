@@ -87,14 +87,27 @@ module QueHacer
             end
           end
         end
+
+        class ClearCompleted < Dry::CLI::Command
+          desc "deletes completed todos"
+          def call(*)
+            @todos ||= TodosRepository.new(Persistence::Fetch.new.all).clear_completed
+            Persistence::Save.new.call(@todos)
+
+            @todos.each do |todo, index|
+              puts "#{index} - [#{todo.completed? ? 'x' : ' '}] #{todo.label}"
+            end
+          end
+        end
       end
 
       register "version", Version, aliases: ["v", "-v", "--version"]
 
       register "items", aliases: ["i"] do |prefix|
+        prefix.register "add", Items::Add
         prefix.register "list", Items::List
         prefix.register "count", Items::Count
-        prefix.register "add", Items::Add
+        prefix.register "clear", Items::ClearCompleted
         prefix.register "complete", Items::Complete
       end
     end

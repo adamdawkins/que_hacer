@@ -26,7 +26,7 @@ A todo item has three possible interactions:
 [x] Counter
 Displays the number of active todos in a pluralized form.
 
-[ ] Clear completed button
+[x] Clear completed button
 Removes completed todos when clicked. Should be hidden when there are no completed todos.
 
 Persistence:
