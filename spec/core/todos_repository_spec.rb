@@ -58,4 +58,17 @@ RSpec.describe TodosRepository do
       expect(repository.count_active).to eq 2
     end
   end
+
+  describe "#update" do
+    let(:todos) do
+      [Todo.new(label: "Buy Milk", completed: true),
+       Todo.new(label: "Buy Eggs", completed: false)]
+    end
+    it "updates the label of the todo at the index" do
+      expect(repository.update(0, "Go Trout Fishing").map { |todo| [todo.label, todo.completed?] }).to eq(
+        [["Go Trout Fishing", true],
+         ["Buy Eggs", false]]
+      )
+    end
+  end
 end

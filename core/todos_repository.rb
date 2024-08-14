@@ -42,6 +42,16 @@ class TodosRepository
     active_todos
   end
 
+  def update(index, label)
+    @todos.each_with_index.map do |todo, idx|
+      if idx == index
+        Todo.new(label:, completed: todo.completed?)
+      else
+        todo
+      end
+    end
+  end
+
   private
 
   def active_todos
