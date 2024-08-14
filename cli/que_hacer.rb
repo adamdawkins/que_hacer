@@ -6,6 +6,18 @@ require_relative "../core/todos_repository"
 require_relative "../persistence/fetch"
 require_relative "../persistence/save"
 
+class Renderer
+  def self.list(todos)
+    if todos.empty?
+      puts "No todos"
+    else
+      todos.each_with_index do |todo, index|
+        puts "#{index} - [#{todo.completed? ? 'x' : ' '}] #{todo.label}"
+      end
+    end
+  end
+end
+
 module QueHacer
   module CLI
     module Commands
@@ -24,14 +36,8 @@ module QueHacer
           desc "Lists items"
 
           def call(*)
-            todos = Persistence::Fetch.new.all
-            if todos.empty?
-              puts "Empty list"
-            else
-              todos.each_with_index do |todo, index|
-                puts "#{index}: #{todo.label}"
-              end
-            end
+            todos = TodosRepository.new(Persistence::Fetch.new.all).all
+            Renderer.list(todos)
           end
         end
 
@@ -55,9 +61,7 @@ module QueHacer
             @todos ||= TodosRepository.new(Persistence::Fetch.new.all)
             @todos = @todos.add(label)
             Persistence::Save.new.call(@todos)
-            @todos.each do |todo|
-              puts "- [ ] #{todo.label}"
-            end
+            Renderer.list(@todos)
           end
         end
 
@@ -73,9 +77,7 @@ module QueHacer
           def call(id:, label:, **)
             @todos = TodosRepository.new(Persistence::Fetch.new.all).update(id.to_i, label)
             Persistence::Save.new.call(@todos)
-            @todos.each do |todo, index|
-              puts "#{index} - [#{todo.completed? ? 'x' : ' '}] #{todo.label}"
-            end
+            Renderer.list(@todos)
           end
         end
 
@@ -86,9 +88,7 @@ module QueHacer
             @todos = TodosRepository.new(Persistence::Fetch.new.all).complete_all
             Persistence::Save.new.call(@todos)
 
-            @todos.each do |todo, index|
-              puts "#{index} - [#{todo.completed? ? 'x' : ' '}] #{todo.label}"
-            end
+            Renderer.list(@todos)
           end
         end
 
@@ -104,9 +104,7 @@ module QueHacer
             @todos ||= TodosRepository.new(Persistence::Fetch.new.all).complete(id.to_i)
             Persistence::Save.new.call(@todos)
 
-            @todos.each do |todo, index|
-              puts "#{index} - [#{todo.completed? ? 'x' : ' '}] #{todo.label}"
-            end
+            Renderer.list(@todos)
           end
         end
 
@@ -122,9 +120,7 @@ module QueHacer
             @todos ||= TodosRepository.new(Persistence::Fetch.new.all).remove(id.to_i)
             Persistence::Save.new.call(@todos)
 
-            @todos.each do |todo, index|
-              puts "#{index} - [#{todo.completed? ? 'x' : ' '}] #{todo.label}"
-            end
+            Renderer.list(@todos)
           end
         end
 
@@ -134,9 +130,7 @@ module QueHacer
             @todos ||= TodosRepository.new(Persistence::Fetch.new.all).clear_completed
             Persistence::Save.new.call(@todos)
 
-            @todos.each do |todo, index|
-              puts "#{index} - [#{todo.completed? ? 'x' : ' '}] #{todo.label}"
-            end
+            Renderer.list(@todos)
           end
         end
       end
