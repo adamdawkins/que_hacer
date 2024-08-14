@@ -32,11 +32,17 @@ module QueHacer
       end
 
       module Items
+        class Fetch
+          def self.todos
+            TodosRepository.new(Persistence::Fetch.new.all)
+          end
+        end
+
         class List < Dry::CLI::Command
           desc "Lists items"
 
           def call(*)
-            todos = TodosRepository.new(Persistence::Fetch.new.all).all
+            todos = Fetch.todos.all
             Renderer.list(todos)
           end
         end
@@ -44,7 +50,7 @@ module QueHacer
         class Count < Dry::CLI::Command
           desc "Counts active items"
           def call(*)
-            count = TodosRepository.new(Persistence::Fetch.new.all).count_active
+            count = Fetch.todos.count_active
             puts "#{count} active item#{count == 1 ? '' : 's'}"
           end
         end
@@ -58,10 +64,9 @@ module QueHacer
           ]
 
           def call(label:, **)
-            @todos ||= TodosRepository.new(Persistence::Fetch.new.all)
-            @todos = @todos.add(label)
-            Persistence::Save.new.call(@todos)
-            Renderer.list(@todos)
+            todos = Fetch.todos.add(label)
+            Persistence::Save.new.call(todos)
+            Renderer.list(todos)
           end
         end
 
@@ -75,9 +80,9 @@ module QueHacer
           ]
 
           def call(id:, label:, **)
-            @todos = TodosRepository.new(Persistence::Fetch.new.all).update(id.to_i, label)
-            Persistence::Save.new.call(@todos)
-            Renderer.list(@todos)
+            todos = Fetch.todos.update(id.to_i, label)
+            Persistence::Save.new.call(todos)
+            Renderer.list(todos)
           end
         end
 
@@ -85,10 +90,10 @@ module QueHacer
           desc "Marks all todos as completed"
 
           def call(*)
-            @todos = TodosRepository.new(Persistence::Fetch.new.all).complete_all
-            Persistence::Save.new.call(@todos)
+            todos = Fetch.todos.complete_all
+            Persistence::Save.new.call(todos)
 
-            Renderer.list(@todos)
+            Renderer.list(todos)
           end
         end
 
@@ -101,10 +106,10 @@ module QueHacer
           ]
 
           def call(id:, **)
-            @todos ||= TodosRepository.new(Persistence::Fetch.new.all).complete(id.to_i)
-            Persistence::Save.new.call(@todos)
+            todos = Fetch.todos.complete(id.to_i)
+            Persistence::Save.new.call(todos)
 
-            Renderer.list(@todos)
+            Renderer.list(todos)
           end
         end
 
@@ -117,20 +122,20 @@ module QueHacer
           ]
 
           def call(id:, **)
-            @todos ||= TodosRepository.new(Persistence::Fetch.new.all).remove(id.to_i)
-            Persistence::Save.new.call(@todos)
+            todos = Fetch.todos.remove(id.to_i)
+            Persistence::Save.new.call(todos)
 
-            Renderer.list(@todos)
+            Renderer.list(todos)
           end
         end
 
         class ClearCompleted < Dry::CLI::Command
           desc "deletes completed todos"
           def call(*)
-            @todos ||= TodosRepository.new(Persistence::Fetch.new.all).clear_completed
-            Persistence::Save.new.call(@todos)
+            todos = Fetch.todos.clear_completed
+            Persistence::Save.new.call(todos)
 
-            Renderer.list(@todos)
+            Renderer.list(todos)
           end
         end
       end

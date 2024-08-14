@@ -34,4 +34,4 @@ Persistence:
 
 CLI:
 [x] - normalize the 'view' of the list
-[ ] - memoize the things we keep doing again and again.
+[x] - memoize the things we keep doing again and again.
