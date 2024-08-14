@@ -61,6 +61,19 @@ module QueHacer
           end
         end
 
+        class CompleteAll < Dry::CLI::Command
+          desc "Marks all todos as completed"
+
+          def call(*)
+            @todos = TodosRepository.new(Persistence::Fetch.new.all).complete_all
+            Persistence::Save.new.call(@todos)
+
+            @todos.each do |todo, index|
+              puts "#{index} - [#{todo.completed? ? 'x' : ' '}] #{todo.label}"
+            end
+          end
+        end
+
         class Complete < Dry::CLI::Command
           desc "Completes a todo"
           argument :id, required: true, desc: "The number of the todo you want to complete"
@@ -114,6 +127,7 @@ module QueHacer
         prefix.register "add", Items::Add
         prefix.register "clear", Items::ClearCompleted
         prefix.register "complete", Items::Complete
+        prefix.register "complete_all", Items::CompleteAll
         prefix.register "count", Items::Count
         prefix.register "list", Items::List
         prefix.register "remove", Items::Remove

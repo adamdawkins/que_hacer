@@ -13,7 +13,7 @@ app, and then extend out from there.
 No todos
 [x] When there are no todos - the only action is to add a todo
 
-[-] Mark all as complete - marks all todos complete
+[x] Mark all as complete - marks all todos complete
 
 Item
 A todo item has three possible interactions:
