@@ -14,6 +14,10 @@ class TodosRepository
     @todos
   end
 
+  def complete_all
+    @todos.map { |todo| Actions::Todos::Complete.call(todo) }
+  end
+
   def complete(index)
     @todos.each_with_index.map do |todo, idx|
       if idx == index

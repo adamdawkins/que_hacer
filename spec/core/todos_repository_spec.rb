@@ -33,6 +33,12 @@ RSpec.describe TodosRepository do
     end
   end
 
+  describe "#complete_all" do
+    it "marks all todos as completed" do
+      expect(repository.complete_all).to all be_completed
+    end
+  end
+
   describe "#clear_completed" do
     let(:todos) do
       [Todo.new(label: "Buy Milk"), Todo.new(label: "Buy Eggs", completed: false),
