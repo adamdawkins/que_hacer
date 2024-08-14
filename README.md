@@ -19,9 +19,9 @@ Item
 A todo item has three possible interactions:
 
 [x] - complete one todo
-[-] - edit one todo
+[x] - edit one todo
 [x] - remove todo
-[-] - update todo
+[x] - update todo
 
 [x] Counter
 Displays the number of active todos in a pluralized form.
